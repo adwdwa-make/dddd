@@ -5,6 +5,7 @@ import {
   Users,
   UserPlus,
   FileText,
+  Coins,
 } from "lucide-react";
 
 const Sidebar = () => {
