@@ -166,7 +166,7 @@ export default function Manage() {
                     id="maxPosts"
                     name="maxPosts"
                     type="number"
-                    placeholder="Max 10 replies per day"
+                    placeholder="Max 10 post per day"
                     value={formData.maxPosts}
                     onChange={handleInputChange}
                     className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
