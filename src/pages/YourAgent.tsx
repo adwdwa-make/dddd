@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function YourAgent() {
   const agents = [
     { name: "Snake AI", created: "01/5/2025", active: false },
@@ -57,9 +59,9 @@ function YourAgent() {
                       ></div>
                     </td>
                     <td className="py-4 px-2 md:px-4 text-right">
-                      <button className="  px-2 md:px-4 text-right mt-4 cursor-pointer  py-1 text-white rounded-lg transition duration-200 backdrop-blur-lg bg-white/8  hover:bg-white/30">
+                      <Link to='/manage' className="  px-2 md:px-4 text-right mt-4 cursor-pointer  py-1 text-white rounded-lg transition duration-200 backdrop-blur-lg bg-white/8  hover:bg-white/30">
                         Manage{" "}
-                      </button>
+                      </Link>
                     </td>
                   </tr>
                 ))}

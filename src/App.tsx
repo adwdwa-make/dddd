@@ -5,6 +5,7 @@ import CreateAgent from "./pages/CreateAgent";
 import YourAgent from "./pages/YourAgent";
 import Profile from "./pages/Profile";
 import Start from "./pages/Start.tsx";
+import Manage from "./pages/Manage.tsx";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function MainContent() {
             <Routes>
               <Route path="/createagent" element={<CreateAgent />} />
               <Route path="/youragent" element={<YourAgent />} />
+              <Route path="/manage" element={<Manage />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>
           </Layout>

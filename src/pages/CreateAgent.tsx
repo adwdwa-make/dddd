@@ -16,7 +16,7 @@ export default function CreateAgent() {
             Automate Your AI Agent
           </h1>
 
-          <div className="mb-4">
+          <div>
             <p className="font-semibold text-lg text-white mb-4">
               Select Framework
             </p>
@@ -104,6 +104,7 @@ export default function CreateAgent() {
                 <input
                   id="name"
                   type="text"
+                  placeholder="Agent's name"
                   className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
                 />
               </div>
@@ -114,6 +115,7 @@ export default function CreateAgent() {
                 <input
                   id="age"
                   type="number"
+                  placeholder="Agent's age"
                   className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
                 />
               </div>
@@ -125,6 +127,7 @@ export default function CreateAgent() {
               <input
                 id="personality"
                 type="text"
+                placeholder="Agent's personality"
                 className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
               />
             </div>
@@ -134,7 +137,8 @@ export default function CreateAgent() {
               </label>
               <textarea
                 id="description"
-                className="w-full border border-[#494848] text-white p-2 md:p-7 rounded-lg outline-none focus:ring-1 focus:ring-gray-500 resize-none"
+                placeholder="Description of your agent"
+                className="w-full border border-[#494848] text-white px-2 py-5 rounded-lg outline-none focus:ring-1 focus:ring-gray-500 resize-none"
               ></textarea>
             </div>
           </div>
