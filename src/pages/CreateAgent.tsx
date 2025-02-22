@@ -95,8 +95,8 @@ export default function CreateAgent() {
             </div>
           </div>
 
-          <div className="mx-auto py-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+          <div className="mx-auto py-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
               <div className="flex flex-col">
                 <label htmlFor="name" className="mb-1 text-white">
                   Name
