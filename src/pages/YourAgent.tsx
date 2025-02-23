@@ -1,18 +1,15 @@
 import { Link } from "react-router-dom";
 
 function YourAgent() {
-  const agents = [
-    { name: "Snake AI", created: "01/5/2025", active: false },
-    { name: "Snake AI", created: "01/5/2025", active: true },
-    { name: "Snake AI", created: "01/5/2025", active: false },
-    { name: "Snake AI", created: "01/5/2025", active: true },
-    { name: "Snake AI", created: "01/5/2025", active: false },
-    { name: "Snake AI", created: "01/5/2025", active: false },
-    { name: "Snake AI", created: "01/5/2025", active: true },
-    { name: "Snake AI", created: "01/5/2025", active: false },
-    { name: "Snake AI", created: "01/5/2025", active: false },
-  ];
 
+  interface Agent {
+    name: string;
+    id: number;
+    active: boolean;
+    date:string;
+  }
+  
+  const agents: Agent[] = [];
   return (
     <div className="h-full bg-black text-white flex items-center justify-center p-0 lg:p-4 ">
       <div className="w-full p-0 lg:p-6 rounded-none lg:rounded-lg shadow-lg overflow-x-auto max-w-full pt-10 pb-10">
@@ -49,7 +46,7 @@ function YourAgent() {
                       {agent.name}
                     </td>
                     <td className="py-2 px-2 md:px-4 text-center">
-                      {agent.created}
+                      {agent.date}
                     </td>
                     <td className="py-2 px-2 md:px-4 text-center">
                       <div

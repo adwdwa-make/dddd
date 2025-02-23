@@ -19,6 +19,7 @@ export default function Manage() {
     maxPosts: "",
     maxReplies: "",
   });
+  const [connected, setConnected] = useState(false); // Connection state
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -38,6 +39,7 @@ export default function Manage() {
   const handleButtonClick = (platform: Platform) => {
     if (platform === "twitter") {
       setSelected(platform);
+      setConnected((prevConnected) => !prevConnected); // Toggle connection state
     }
   };
 
@@ -66,7 +68,6 @@ export default function Manage() {
                     ? "bg-[#76a0ff] border-[#6694f6]"
                     : "bg-[#242323] border-[#40403e]"
                 }  hover:bg-[#3e3e3e] hover:cursor-pointer`}
-                onClick={() => {}}
                 disabled={true}
               >
                 <FontAwesomeIcon icon={faDiscord} size="lg" />
@@ -77,12 +78,12 @@ export default function Manage() {
                     ? "bg-[#76a0ff] border-[#6694f6]"
                     : "bg-[#242323] border-[#40403e]"
                 } hover:bg-[#3e3e3e] hover:cursor-pointer`}
-                onClick={() => {}}
                 disabled={true}
               >
                 <FontAwesomeIcon icon={faTelegram} size="lg" />
               </button>
             </div>
+
             <div className="mx-auto py-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
                 <div className="flex flex-col">
@@ -187,19 +188,27 @@ export default function Manage() {
                   />
                 </div>
               </div>
+
               <div className="w-full flex items-center justify-between mb-4">
-                <button className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 cursor-pointer text-nowrap transition-all duration-400 ease-in-out backdrop-blur-lg border border-[#6a94f0] hover:bg-white/15">
-                  Connect With{" "}
+                <button
+                  className={`w-full py-2 rounded-4xl flex items-center justify-center gap-2 cursor-pointer text-nowrap transition-all duration-400 ease-in-out backdrop-blur-lg border ${
+                    connected ? "border-[#6a94f0] bg-[#6a94f0]" : "border-[#6a94f0] hover:bg-white/15"
+                  }`}
+                  onClick={() => setConnected((prev) => !prev)}
+                >
+                  {connected ? "Disconnect" : "Connect"}{" "}
                   <FontAwesomeIcon icon={faXTwitter} className="" />
                 </button>
               </div>
+
               <div className="text-center w-full mb-4">
                 <button
                   className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 cursor-pointer text-nowrap transition-all duration-400 ease-in-out backdrop-blur-lg border border-[#6a94f0] hover:bg-white/15"
                 >
-                 Start Automation
+                  Start Automation
                 </button>
               </div>
+
               <div className="text-center w-full">
                 <button
                   type="submit"

@@ -27,6 +27,8 @@ export default function CreateAgent() {
     puppetosSelected: false,
   });
 
+  const [connected, setConnected] = useState(false); // Initially set to false
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -48,6 +50,11 @@ export default function CreateAgent() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted with data:", formData);
+  };
+
+  // Toggle the connected state between true and false
+  const handleConnect = () => {
+    setConnected((prevConnected) => !prevConnected);
   };
 
   return (
@@ -201,9 +208,19 @@ export default function CreateAgent() {
               </div>
 
               <div className="w-full flex items-center justify-between mb-6">
-                <button className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 cursor-pointer text-nowrap transition-all duration-400 ease-in-out backdrop-blur-lg border border-[#6a94f0] hover:bg-white/15">
-                  Connect With <FontAwesomeIcon icon={faXTwitter} />
-                </button>
+                {!connected ? (
+                  <button
+                    type="button"
+                    onClick={handleConnect}
+                    className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 cursor-pointer text-nowrap transition-all duration-400 ease-in-out backdrop-blur-lg border border-[#6a94f0] hover:bg-white/15"
+                  >
+                    Connect With <FontAwesomeIcon icon={faXTwitter} />
+                  </button>
+                ) : (
+                  <button onClick={handleConnect} className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 text-black cursor-pointer bg-[#6a94f0] transition-all duration-400 ease-in-out backdrop-blur-lg border border-white/10 hover:bg-white/10 ">
+                    Disconnect <FontAwesomeIcon icon={faXTwitter} />
+                  </button>
+                )}
               </div>
 
               <div className="w-full md:w-1/2 flex items-center justify-center mb-4 px-4 mx-auto">
