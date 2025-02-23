@@ -14,16 +14,16 @@ import Manage from "./pages/Manage.tsx";
 import {
   ConnectionProvider,
   WalletProvider,
-  useWallet,
 } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import {
   PhantomWalletAdapter,
   SolflareWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
-import { clusterApiUrl, PublicKey } from "@solana/web3.js";
+import { clusterApiUrl } from "@solana/web3.js";
 import { useMemo } from "react";
 import "@solana/wallet-adapter-react-ui/styles.css";
+import { Toaster } from "./components/ui/sonner.tsx";
 
 type Network = "mainnet-beta" | "testnet" | "devnet";
 
@@ -42,6 +42,7 @@ function App() {
         <WalletModalProvider>
           <Router>
             <MainContent />
+            <Toaster />
           </Router>
         </WalletModalProvider>
       </WalletProvider>
@@ -76,50 +77,5 @@ function MainContent() {
   );
 }
 
-export function WalletConnector() {
-  const { publicKey, connect, disconnect, connected } = useWallet();
-
-  const handleConnect = async () => {
-    try {
-      await connect();
-    } catch (error) {
-      console.error("Error connecting to wallet:", error);
-    }
-  };
-
-  const handleDisconnect = async () => {
-    try {
-      await disconnect();
-    } catch (error) {
-      console.error("Error disconnecting wallet:", error);
-    }
-  };
-
-  return (
-    <div className="wallet-connector">
-      {connected && publicKey ? (
-        <>
-          <span>
-            Connected: {publicKey.toBase58().slice(0, 4)}...
-            {publicKey.toBase58().slice(-4)}
-          </span>
-          <button
-            onClick={handleDisconnect}
-            className="ml-2 px-2 py-1 bg-red-500 text-white rounded"
-          >
-            Disconnect
-          </button>
-        </>
-      ) : (
-        <button
-          onClick={handleConnect}
-          className="px-2 py-1 bg-green-500 text-white rounded"
-        >
-          Connect Wallet
-        </button>
-      )}
-    </div>
-  );
-}
 
 export default App;

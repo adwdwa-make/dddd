@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image1 from "../assets/8787.png";
 import { Logs, House, Users, UserPlus, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { toast } from "sonner"; 
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,20 +18,45 @@ export default function Header() {
         setIsWalletMenuOpen(!isWalletMenuOpen);
       } else {
         setVisible(true);
+        toast("Please select a wallet to connect", {
+          description: "Wallet Connection",
+          duration: 3000,
+        });
       }
     } catch (error) {
       console.error("Wallet connection error:", error);
+      toast.error("Failed to connect wallet", {
+        description: "Connection Error",
+        duration: 3000,
+      });
     }
   };
 
   const handleDisconnect = async () => {
     try {
       await disconnect();
-      setIsWalletMenuOpen(false); 
+      setIsWalletMenuOpen(false);
+      toast.success("Wallet Disconnected", {
+        description: "Your wallet has been successfully disconnected",
+        duration: 3000,
+      });
     } catch (error) {
       console.error("Wallet disconnection error:", error);
+      toast.error("Failed to disconnect wallet", {
+        description: "Disconnection Error",
+        duration: 3000,
+      });
     }
   };
+
+  useEffect(() => {
+    if (connected && publicKey) {
+      toast.success("Wallet Connected", {
+        description: `Connected as ${publicKey.toBase58().slice(0, 4)}...${publicKey.toBase58().slice(-4)}`,
+        duration: 3000,
+      });
+    }
+  }, [connected, publicKey]);
 
   return (
     <header className="fixed top-0 left-0 w-full px-4 md:px-8 flex items-center justify-between p-4 bg-black text-white shadow-md z-50 border-b border-[#494848]">
