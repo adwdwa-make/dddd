@@ -27,7 +27,7 @@ export default function CreateAgent() {
     puppetosSelected: false,
   });
 
-  const [connected, setConnected] = useState(false); // Initially set to false
+  const [connected, setConnected] = useState(false);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -35,7 +35,7 @@ export default function CreateAgent() {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: name === "age" ? (isNaN(Number(value)) ? value : Number(value)) : value,
     }));
   };
 
@@ -52,7 +52,6 @@ export default function CreateAgent() {
     console.log("Form submitted with data:", formData);
   };
 
-  // Toggle the connected state between true and false
   const handleConnect = () => {
     setConnected((prevConnected) => !prevConnected);
   };
@@ -151,7 +150,7 @@ export default function CreateAgent() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
                   <div className="flex flex-col">
                     <label htmlFor="name" className="mb-1 text-white">
-                      Name
+                      Name *
                     </label>
                     <input
                       id="name"
@@ -159,28 +158,34 @@ export default function CreateAgent() {
                       type="text"
                       value={formData.name}
                       onChange={handleChange}
+                      required
                       placeholder="Agent's name"
                       className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
+                      minLength={1}
+                      maxLength={10}
                     />
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="age" className="mb-1 text-white">
-                      Age
+                      Age *
                     </label>
                     <input
                       id="age"
                       name="age"
                       type="number"
-                      value={formData.age}
+                      value={formData.age || ""}
                       onChange={handleChange}
+                      required
                       placeholder="Agent's age"
                       className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
+                      min={18}
+                      max={100}
                     />
                   </div>
                 </div>
                 <div className="flex flex-col mb-2">
                   <label htmlFor="personality" className="mb-1 text-white">
-                    Personality
+                    Personality *
                   </label>
                   <input
                     id="personality"
@@ -188,21 +193,27 @@ export default function CreateAgent() {
                     type="text"
                     value={formData.personality}
                     onChange={handleChange}
+                    required
                     placeholder="Agent's personality"
                     className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
+                    minLength={1}
+                    maxLength={20}
                   />
                 </div>
                 <div className="flex flex-col mb-2">
                   <label htmlFor="description" className="mb-1 text-white">
-                    Description
+                    Description *
                   </label>
                   <textarea
                     id="description"
                     name="description"
                     value={formData.description}
                     onChange={handleChange}
+                    required
                     placeholder="Description of your agent"
                     className="w-full border border-[#494848] text-white px-2 py-5 rounded-lg outline-none focus:ring-1 focus:ring-gray-500 resize-none"
+                    minLength={10}
+                    maxLength={900}
                   ></textarea>
                 </div>
               </div>
@@ -217,7 +228,10 @@ export default function CreateAgent() {
                     Connect With <FontAwesomeIcon icon={faXTwitter} />
                   </button>
                 ) : (
-                  <button onClick={handleConnect} className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 text-black cursor-pointer bg-[#6a94f0] transition-all duration-400 ease-in-out backdrop-blur-lg border border-white/10 hover:bg-white/10 ">
+                  <button
+                    onClick={handleConnect}
+                    className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 text-black cursor-pointer bg-[#6a94f0] transition-all duration-400 ease-in-out backdrop-blur-lg border border-white/10 hover:bg-white/10 "
+                  >
                     Disconnect <FontAwesomeIcon icon={faXTwitter} />
                   </button>
                 )}

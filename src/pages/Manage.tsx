@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faXTwitter,
-  faDiscord,
-  faTelegram,
-} from "@fortawesome/free-brands-svg-icons";
+import { faXTwitter, faDiscord, faTelegram } from "@fortawesome/free-brands-svg-icons";
 
 type Platform = "twitter" | "discord" | "telegram";
 
@@ -88,7 +84,7 @@ export default function Manage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
                 <div className="flex flex-col">
                   <label htmlFor="name" className="mb-1 text-white">
-                    Name
+                    Name *
                   </label>
                   <input
                     id="name"
@@ -98,11 +94,14 @@ export default function Manage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
+                    required
+                    minLength={1}
+                    maxLength={10}
                   />
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="age" className="mb-1 text-white">
-                    Age
+                    Age *
                   </label>
                   <input
                     id="age"
@@ -112,13 +111,16 @@ export default function Manage() {
                     value={formData.age}
                     onChange={handleInputChange}
                     className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
+                    required
+                    min={18}
+                    max={100}
                   />
                 </div>
               </div>
 
               <div className="flex flex-col mb-2">
                 <label htmlFor="personality" className="mb-1 text-white">
-                  Personality
+                  Personality *
                 </label>
                 <input
                   id="personality"
@@ -128,11 +130,14 @@ export default function Manage() {
                   value={formData.personality}
                   onChange={handleInputChange}
                   className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
+                  required
+                  minLength={1}
+                  maxLength={20}
                 />
               </div>
               <div className="flex flex-col mb-2">
                 <label htmlFor="description" className="mb-1 text-white">
-                  Description
+                  Description *
                 </label>
                 <textarea
                   id="description"
@@ -141,6 +146,8 @@ export default function Manage() {
                   value={formData.description}
                   onChange={handleInputChange}
                   className="w-full border border-[#494848] text-white px-2 py-4 rounded-lg outline-none focus:ring-1 focus:ring-gray-500 resize-none"
+                  minLength={10}
+                  maxLength={900}
                 />
               </div>
               <div className="flex flex-col mb-2">
@@ -167,10 +174,12 @@ export default function Manage() {
                     id="maxPosts"
                     name="maxPosts"
                     type="number"
-                    placeholder="Max 10 post per day"
+                    placeholder="Max 10 posts per day"
                     value={formData.maxPosts}
                     onChange={handleInputChange}
                     className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
+                    min={1}
+                    max={10}
                   />
                 </div>
                 <div className="flex flex-col">
@@ -185,6 +194,8 @@ export default function Manage() {
                     value={formData.maxReplies}
                     onChange={handleInputChange}
                     className="w-full border border-[#494848] text-white p-2 md:p-3 rounded-lg outline-none focus:ring-1 focus:ring-gray-500"
+                    min={1}
+                    max={10}
                   />
                 </div>
               </div>
