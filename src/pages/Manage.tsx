@@ -15,7 +15,7 @@ export default function Manage() {
     maxPosts: "",
     maxReplies: "",
   });
-  const [connected, setConnected] = useState(false); // Connection state
+  const [connected, setConnected] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,13 +29,21 @@ export default function Manage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    setFormData({
+      name: "",
+      age: "",
+      personality: "",
+      description: "",
+      mood: "",
+      maxPosts: "",
+      maxReplies: "",
+    });
   };
 
   const handleButtonClick = (platform: Platform) => {
     if (platform === "twitter") {
       setSelected(platform);
-      setConnected((prevConnected) => !prevConnected); // Toggle connection state
+      setConnected((prevConnected) => !prevConnected);
     }
   };
 

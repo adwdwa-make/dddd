@@ -28,6 +28,7 @@ export default function CreateAgent() {
   });
 
   const [connected, setConnected] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -49,7 +50,19 @@ export default function CreateAgent() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted with data:", formData);
+    if (!formData.openaiSelected && !formData.puppetosSelected) {
+      setError("Please select either OpenAI or PuppetOS.");
+      return;
+    }
+    setError("");
+    setFormData({
+      name: "",
+      age: "",
+      personality: "",
+      description: "",
+      openaiSelected: false,
+      puppetosSelected: false,
+    });
   };
 
   const handleConnect = () => {
@@ -144,6 +157,7 @@ export default function CreateAgent() {
                     </div>
                   </div>
                 </div>
+                {error && <p className="text-red-500 text-center mt-2">{error}</p>}
               </div>
 
               <div className="mx-auto py-2">
