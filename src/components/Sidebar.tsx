@@ -1,12 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  House,
-  Users,
-  UserPlus,
-  FileText,
-  Coins,
-} from "lucide-react";
+import { House, Users, UserPlus, FileText } from "lucide-react";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -29,7 +23,7 @@ const Sidebar = () => {
       path: "",
       icon: <FileText className="text-2xl" />,
       isAnchor: true,
-    }, 
+    },
   ];
 
   return (
@@ -48,13 +42,11 @@ const Sidebar = () => {
                       <a
                         target="_blank"
                         href="https://x.com/home"
-                        className={`flex items-center gap-3 p-2 rounded-r-full shadow-md transition-all w-full text-left cursor-pointer
-                        text-gray-400
-                       ${
-                         active === item.path
-                           ? "bg-[#222128] text-gray-400"
-                           : "hover:bg-[#222128] text-gray-400"
-                       }`}
+                        className={`flex items-center gap-3 p-2 rounded-r-full shadow-md transition-all w-full text-left cursor-pointer text-gray-400 ${
+                          active === item.path
+                            ? "bg-[#222128] text-gray-400"
+                            : "hover:bg-[#222128] text-gray-400"
+                        }`}
                       >
                         <div
                           className={`flex items-center justify-center w-9 h-9 rounded-full ${

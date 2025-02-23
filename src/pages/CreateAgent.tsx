@@ -7,6 +7,8 @@ import {
   faTelegram,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { toast } from "sonner";
+import { useWallet } from "@solana/wallet-adapter-react"; 
 
 interface FormData {
   name: string;
@@ -27,8 +29,8 @@ export default function CreateAgent() {
     puppetosSelected: false,
   });
 
-  const [connected, setConnected] = useState(false);
   const [error, setError] = useState<string>("");
+  const { connected, connect, disconnect } = useWallet(); // Use actual wallet status
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -50,11 +52,29 @@ export default function CreateAgent() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formData.openaiSelected && !formData.puppetosSelected) {
-      setError("Please select either OpenAI or PuppetOS.");
+
+    if (!connected) {
+      toast.error("Wallet Connection Required", {
+        description: "Please connect your wallet to create an agent",
+        duration: 3000,
+      });
       return;
     }
+
+    if (!formData.openaiSelected && !formData.puppetosSelected) {
+      setError("Please select either OpenAI or PuppetOS.");
+      toast.error("Form Submission Failed", {
+        description: "Please select either OpenAI or PuppetOS.",
+        duration: 3000,
+      });
+      return;
+    }
+
     setError("");
+    toast.success("Agent Created", {
+      description: `Successfully created agent: ${formData.name}`,
+      duration: 3000,
+    });
     setFormData({
       name: "",
       age: "",
@@ -65,8 +85,20 @@ export default function CreateAgent() {
     });
   };
 
-  const handleConnect = () => {
-    setConnected((prevConnected) => !prevConnected);
+  const handleConnect = async () => {
+    try {
+      if (connected) {
+        await disconnect();
+      } else {
+        await connect();
+      }
+    } catch (error) {
+      console.error("Wallet connection error:", error);
+      toast.error("Connection Failed", {
+        description: "Failed to connect/disconnect wallet",
+        duration: 3000,
+      });
+    }
   };
 
   return (
@@ -244,7 +276,7 @@ export default function CreateAgent() {
                 ) : (
                   <button
                     onClick={handleConnect}
-                    className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 text-black cursor-pointer bg-[#6a94f0] transition-all duration-400 ease-in-out backdrop-blur-lg border border-white/10 hover:bg-white/10 "
+                    className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 text-black cursor-pointer bg-[#6a94f0] transition-all duration-400 ease-in-out backdrop-blur-lg border border-white/10 hover:bg-white/10"
                   >
                     Disconnect <FontAwesomeIcon icon={faXTwitter} />
                   </button>
@@ -271,7 +303,10 @@ export default function CreateAgent() {
               </div>
 
               <div className="text-center w-full">
-                <button className="w-full py-2 rounded-4xl text-lg text-black cursor-pointer bg-[#6a94f0] transition-all duration-400 ease-in-out backdrop-blur-lg border border-white/10 hover:bg-white/10 hover:text-white">
+                <button
+                  type="submit"
+                  className="w-full py-2 rounded-4xl text-lg text-black cursor-pointer bg-[#6a94f0] transition-all duration-400 ease-in-out backdrop-blur-lg border border-white/10 hover:bg-white/10 hover:text-white"
+                >
                   Create
                 </button>
               </div>
