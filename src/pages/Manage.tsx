@@ -187,10 +187,17 @@ export default function Manage() {
                   />
                 </div>
               </div>
-              <div className="w-full flex items-center justify-between mb-6">
+              <div className="w-full flex items-center justify-between mb-4">
                 <button className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 cursor-pointer text-nowrap transition-all duration-400 ease-in-out backdrop-blur-lg border border-[#6a94f0] hover:bg-white/15">
                   Connect With{" "}
                   <FontAwesomeIcon icon={faXTwitter} className="" />
+                </button>
+              </div>
+              <div className="text-center w-full mb-4">
+                <button
+                  className="w-full py-2 rounded-4xl flex items-center justify-center gap-2 cursor-pointer text-nowrap transition-all duration-400 ease-in-out backdrop-blur-lg border border-[#6a94f0] hover:bg-white/15"
+                >
+                 Start Automation
                 </button>
               </div>
               <div className="text-center w-full">
